@@ -1,0 +1,19 @@
+name: 'Veinmind'
+description: 'Scan images for security issues with veinmind-tools'
+author: 'Veinmind Team'
+branding:
+  color: purple
+  icon: check-circle
+inputs:
+  scan-action:
+    description: 'Scan action for scanning security issues'
+    required: true
+    default: 'scan-host'
+  image-ref:
+    description: 'image reference'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - run: bash run.sh ${{ inputs.scan-action }} ${{ inputs.image-ref }}
+      shell: bash

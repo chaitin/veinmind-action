@@ -1,0 +1,14 @@
+on: [push]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image from your dockerfile
+        run: docker build -t my-app:${{ github.sha }} .
+      - name: Run veinmind-tools to scan image
+        uses: chaitin/veinmind-action@main
+        with:
+          scan-action: scan-host
+          image-ref: 'my-app:${{ github.sha }}'

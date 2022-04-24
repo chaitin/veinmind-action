@@ -1,0 +1,22 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: test veinmind action
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chaitin/veinmind-action@main
+        with:
+          scan-action: scan-host
+          image-ref: ubuntu:20.04
+  test2:
+    runs-on: ubuntu-latest
+    name: test veinmind action
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker build -t weakpass:latest -f test/Dockerfile .
+      - uses: chaitin/veinmind-action@main
+        with:
+          scan-action: scan-host
+          image-ref: weakpass:latest
