@@ -12,8 +12,16 @@ inputs:
   image-ref:
     description: 'image reference'
     required: true
+  output:
+    description: 'save results to output file'
+    required: false
+    default: 'report.json'
 runs:
   using: 'composite'
   steps:
-    - run: bash run.sh ${{ inputs.scan-action }} ${{ inputs.image-ref }}
+    - run: mkdir data && bash run.sh ${{ inputs.scan-action }} ${{ inputs.image-ref }} -o /data/${{ inputs.output }}
       shell: bash
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.output }}
+        path: data/${{ inputs.output }}
