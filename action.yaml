@@ -12,6 +12,10 @@ inputs:
   image-ref:
     description: 'image reference'
     required: true
+  exit-code:
+    description: 'exit-code when specified security issue found'
+    required: false
+    default: '0'
   output:
     description: 'save results to output file'
     required: false
@@ -19,7 +23,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: mkdir data && bash run.sh ${{ inputs.scan-action }} ${{ inputs.image-ref }} -o /data/${{ inputs.output }}
+    - run: mkdir data && bash run.sh ${{ inputs.scan-action }} ${{ inputs.image-ref }} -o /data/${{ inputs.output }} -e ${{ inputs.exit-code }}
       shell: bash
     - uses: actions/upload-artifact@v2
       with:
