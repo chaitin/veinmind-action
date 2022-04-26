@@ -20,3 +20,4 @@ jobs:
         with:
           scan-action: scan-host
           image-ref: weakpass:latest
+          exit-code: 1
