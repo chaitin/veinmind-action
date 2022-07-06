@@ -23,7 +23,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: bash run.sh ${{ inputs.scan-action }} ${{ inputs.image-ref }} -o ${{ inputs.output }} -e ${{ inputs.exit-code }}
+    - run: docker pull veinmind/veinmind-runner:latest && docker run --rm --mount 'type=bind,source=/,target=/host,readonly,bind-propagation=rslave' -v /var/run/docker.sock:/var/run/docker.sock -v `pwd`:/tool/resource veinmind/veinmind-runner ${{ inputs.scan-action }} ${{ inputs.image-ref }} -o ${{ inputs.output }} -e ${{ inputs.exit-code }}
       shell: bash
     - uses: actions/upload-artifact@v2
       with:
