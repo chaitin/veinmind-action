@@ -8,7 +8,7 @@ inputs:
   scan-action:
     description: 'Scan action for scanning security issues'
     required: true
-    default: 'scan-host'
+    default: 'scan image'
   image-ref:
     description: 'image reference'
     required: true
